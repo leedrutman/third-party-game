@@ -10,7 +10,7 @@ export default function TitleScreen({ onStart, era = 'historical', onSetEra }) {
       {/* Decorative header */}
       <div className="w-full max-w-sm mb-6">
         <img
-          src={isModern ? '/decorative/header_ballot_modern.jpg' : '/decorative/header_ballot_historical.jpg'}
+          src={isModern ? `${import.meta.env.BASE_URL}decorative/header_ballot_modern.jpg` : `${import.meta.env.BASE_URL}decorative/header_ballot_historical.jpg`}
           alt=""
           className="w-full h-auto object-contain opacity-80 rounded"
           loading="lazy"
@@ -202,7 +202,7 @@ export default function TitleScreen({ onStart, era = 'historical', onSetEra }) {
       {/* Decorative bunting */}
       <div className="w-full max-w-sm mt-8">
         <img
-          src={isModern ? '/decorative/bunting_modern.png' : '/decorative/bunting_historical.png'}
+          src={isModern ? `${import.meta.env.BASE_URL}decorative/bunting_modern.png` : `${import.meta.env.BASE_URL}decorative/bunting_historical.png`}
           alt=""
           className="w-full h-auto max-h-20 object-contain opacity-60"
           loading="lazy"
