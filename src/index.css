@@ -1,0 +1,410 @@
+@import "tailwindcss";
+
+@theme {
+  --color-cream: #F5F0E8;
+  --color-cream-dark: #E8E0D0;
+  --color-walnut: #2C1810;
+  --color-walnut-light: #4A3228;
+  --color-brass: #B8860B;
+  --color-brass-light: #D4A017;
+  --color-brass-dark: #8B6508;
+  --color-burgundy: #722F37;
+  --color-burgundy-light: #8B3A44;
+  --color-navy: #1B365D;
+  --color-forest: #2D5F2D;
+  --color-brown: #8B6914;
+  --color-darkred: #8B1A1A;
+  --color-parchment: #F0E6D3;
+
+  --font-display: 'Playfair Display', serif;
+  --font-body: 'Libre Baskerville', serif;
+  --font-ticker: 'Special Elite', cursive;
+}
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #F5F0E8;
+  color: #2C1810;
+  font-family: 'Libre Baskerville', serif;
+  min-height: 100dvh;
+  overflow-x: hidden;
+}
+
+#root {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+}
+
+.paper-texture {
+  background-image:
+    repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(139,119,101,0.02) 2px, rgba(139,119,101,0.02) 4px),
+    repeating-linear-gradient(90deg, transparent, transparent 3px, rgba(139,119,101,0.015) 3px, rgba(139,119,101,0.015) 6px);
+}
+
+.divider-ornate {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin: 1.5rem 0;
+}
+.divider-ornate::before,
+.divider-ornate::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #B8860B, transparent);
+}
+
+.card-gilded {
+  background: linear-gradient(135deg, #F0E6D3, #F5F0E8);
+  border: 1px solid rgba(44, 24, 16, 0.2);
+  border-radius: 4px;
+  box-shadow: 0 1px 3px rgba(44,24,16,0.1), inset 0 1px 0 rgba(255,255,255,0.5);
+}
+
+.btn-brass {
+  background: linear-gradient(180deg, #D4A017, #B8860B);
+  color: #2C1810;
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  padding: 0.75rem 1.5rem;
+  border: 1px solid #8B6508;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(44,24,16,0.2), inset 0 1px 0 rgba(255,255,255,0.3);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  min-height: 48px;
+  font-size: 1rem;
+}
+.btn-brass:hover {
+  background: linear-gradient(180deg, #E0B020, #C49210);
+  box-shadow: 0 3px 6px rgba(44,24,16,0.25), inset 0 1px 0 rgba(255,255,255,0.4);
+}
+.btn-brass:active {
+  background: linear-gradient(180deg, #B8860B, #8B6508);
+  box-shadow: 0 1px 2px rgba(44,24,16,0.2), inset 0 1px 3px rgba(0,0,0,0.1);
+  transform: translateY(1px);
+}
+
+.btn-option {
+  background: linear-gradient(135deg, #F5F0E8, #E8E0D0);
+  border: 2px solid rgba(44, 24, 16, 0.15);
+  border-radius: 6px;
+  padding: 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-height: 48px;
+  text-align: left;
+  width: 100%;
+}
+.btn-option:hover {
+  border-color: #B8860B;
+  box-shadow: 0 2px 8px rgba(184,134,11,0.15);
+}
+.btn-option.selected {
+  border-color: #B8860B;
+  background: linear-gradient(135deg, #F5EDD8, #EDE3C8);
+  box-shadow: 0 0 0 1px #B8860B, 0 2px 8px rgba(184,134,11,0.2);
+}
+.btn-option:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  position: relative;
+}
+
+.stamp-banned {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(-15deg);
+  font-family: 'Playfair Display', serif;
+  font-weight: 900;
+  font-size: 1.5rem;
+  color: #8B1A1A;
+  border: 3px solid #8B1A1A;
+  padding: 0.25rem 1rem;
+  letter-spacing: 0.15em;
+  opacity: 0.8;
+  pointer-events: none;
+}
+
+.support-meter {
+  height: 8px;
+  background: rgba(44, 24, 16, 0.1);
+  border-radius: 4px;
+  overflow: hidden;
+}
+.support-meter-fill {
+  height: 100%;
+  border-radius: 4px;
+  transition: width 1s ease-out;
+}
+
+.headline-toast {
+  animation: slideUp 0.4s ease-out, fadeOut 0.5s ease-in 3s forwards;
+}
+@keyframes slideUp {
+  from { transform: translateY(100%); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+@keyframes fadeOut {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+.screen-enter {
+  animation: screenFadeIn 0.5s ease-out;
+}
+@keyframes screenFadeIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.seat-reveal {
+  animation: seatPop 0.3s ease-out both;
+}
+@keyframes seatPop {
+  from { transform: scale(0); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+.telegraph-text {
+  font-family: 'Special Elite', cursive;
+  letter-spacing: 0.05em;
+  line-height: 1.8;
+}
+
+.resource-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 30;
+  background: linear-gradient(180deg, #E8E0D0, #F0E6D3);
+  border-bottom: 1px solid rgba(44, 24, 16, 0.15);
+  padding: 0.375rem 0;
+  box-shadow: 0 1px 3px rgba(44, 24, 16, 0.08);
+}
+
+.resource-meter {
+  height: 6px;
+  background: rgba(44, 24, 16, 0.08);
+  border-radius: 3px;
+  overflow: hidden;
+  min-width: 40px;
+}
+.resource-meter-fill {
+  height: 100%;
+  border-radius: 3px;
+  transition: width 0.6s ease-out;
+}
+
+/* Add top padding to screens when resource bar is showing */
+.has-resource-bar {
+  padding-top: 2.5rem;
+}
+
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(184,134,11,0.3); border-radius: 3px; }
+
+/* ============================================================
+   MODERN THEME — activated via .era-modern on root element
+   Overrides Gilded Age broadsheet with 2026 futuristic/ethereal
+   ============================================================ */
+
+.era-modern {
+  --color-cream: #f8fafc;
+  --color-cream-dark: #e2e8f0;
+  --color-walnut: #334155;
+  --color-walnut-light: #475569;
+  --color-brass: #0ea5e9;
+  --color-brass-light: #38bdf8;
+  --color-brass-dark: #0284c7;
+  --color-burgundy: #be123c;
+  --color-burgundy-light: #e11d48;
+  --color-navy: #1e3a5f;
+  --color-forest: #10b981;
+  --color-brown: #0ea5e9;
+  --color-darkred: #ef4444;
+  --color-parchment: #f1f5f9;
+
+  --font-display: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-body: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-ticker: 'JetBrains Mono', 'SF Mono', ui-monospace, monospace;
+}
+
+/* Body / root overrides */
+.era-modern,
+.era-modern body {
+  background: linear-gradient(135deg, #f8fafc 0%, #eff6ff 50%, #f0f9ff 100%);
+  color: #334155;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+/* Typography overrides */
+.era-modern .font-display {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif !important;
+  font-weight: 700;
+}
+.era-modern .font-body {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif !important;
+}
+.era-modern .font-ticker {
+  font-family: 'JetBrains Mono', 'SF Mono', ui-monospace, monospace !important;
+}
+
+/* Color utility overrides */
+.era-modern .text-walnut { color: #334155; }
+.era-modern .text-brass { color: #0ea5e9; }
+.era-modern .text-brass-dark { color: #0284c7; }
+.era-modern .text-forest { color: #10b981; }
+.era-modern .text-darkred { color: #ef4444; }
+.era-modern .text-burgundy { color: #be123c; }
+.era-modern .bg-brass { background-color: #0ea5e9; }
+.era-modern .bg-cream { background-color: #f8fafc; }
+.era-modern .bg-cream-dark { background-color: #e2e8f0; }
+.era-modern .bg-parchment { background-color: #f1f5f9; }
+.era-modern .bg-forest { background-color: #10b981; }
+.era-modern .bg-darkred { background-color: #ef4444; }
+.era-modern .border-brass { border-color: #0ea5e9; }
+
+/* Paper texture — clean, no texture */
+.era-modern .paper-texture {
+  background-image: none;
+  background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+}
+
+/* Card — frosted glass */
+.era-modern .card-gilded {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 0.75rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05), 0 1px 2px rgba(0, 0, 0, 0.03);
+}
+
+/* Primary button — teal gradient with glow */
+.era-modern .btn-brass {
+  background: linear-gradient(135deg, #06b6d4, #0ea5e9, #0d9488);
+  color: #ffffff;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  font-weight: 600;
+  border: none;
+  border-radius: 0.75rem;
+  box-shadow: 0 2px 8px rgba(14, 165, 233, 0.3), 0 1px 3px rgba(0, 0, 0, 0.08);
+  letter-spacing: -0.01em;
+}
+.era-modern .btn-brass:hover {
+  background: linear-gradient(135deg, #22d3ee, #38bdf8, #14b8a6);
+  box-shadow: 0 4px 16px rgba(14, 165, 233, 0.4), 0 2px 4px rgba(0, 0, 0, 0.08);
+  transform: translateY(-1px);
+}
+.era-modern .btn-brass:active {
+  background: linear-gradient(135deg, #0891b2, #0284c7, #0f766e);
+  box-shadow: 0 1px 4px rgba(14, 165, 233, 0.25);
+  transform: translateY(0);
+}
+
+/* Option button — clean bordered card */
+.era-modern .btn-option {
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1.5px solid #e2e8f0;
+  border-radius: 0.75rem;
+  transition: all 0.2s ease;
+}
+.era-modern .btn-option:hover {
+  border-color: #0ea5e9;
+  box-shadow: 0 0 0 1px rgba(14, 165, 233, 0.1), 0 4px 12px rgba(14, 165, 233, 0.1);
+  background: rgba(255, 255, 255, 0.8);
+}
+.era-modern .btn-option.selected {
+  border-color: #0ea5e9;
+  background: rgba(14, 165, 233, 0.05);
+  box-shadow: 0 0 0 2px rgba(14, 165, 233, 0.2), 0 4px 12px rgba(14, 165, 233, 0.12);
+}
+
+/* Support meter — rounded, lighter */
+.era-modern .support-meter {
+  height: 8px;
+  background: rgba(148, 163, 184, 0.15);
+  border-radius: 9999px;
+}
+.era-modern .support-meter-fill {
+  border-radius: 9999px;
+}
+
+/* Resource bar */
+.era-modern .resource-bar {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(226, 232, 240, 0.6);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+.era-modern .resource-meter {
+  background: rgba(148, 163, 184, 0.12);
+  border-radius: 9999px;
+}
+.era-modern .resource-meter-fill {
+  border-radius: 9999px;
+}
+
+/* Divider — clean thin line */
+.era-modern .divider-ornate::before,
+.era-modern .divider-ornate::after {
+  background: linear-gradient(90deg, transparent, #cbd5e1, transparent);
+}
+
+/* Stamp — modern red badge */
+.era-modern .stamp-banned {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  font-weight: 800;
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  color: #ffffff;
+  background: #ef4444;
+  border: none;
+  border-radius: 0.5rem;
+  padding: 0.375rem 1rem;
+  letter-spacing: 0.08em;
+  opacity: 0.95;
+  transform: translate(-50%, -50%) rotate(-5deg);
+  box-shadow: 0 2px 8px rgba(239, 68, 68, 0.4);
+}
+
+/* Telegraph text — modern mono */
+.era-modern .telegraph-text {
+  font-family: 'JetBrains Mono', 'SF Mono', ui-monospace, monospace;
+  letter-spacing: -0.02em;
+  line-height: 1.6;
+}
+
+/* Result states */
+.era-modern .result-win {
+  background: rgba(16, 185, 129, 0.08);
+  border-color: rgba(16, 185, 129, 0.3);
+}
+.era-modern .result-spoiler {
+  background: rgba(239, 68, 68, 0.08);
+  border-color: rgba(239, 68, 68, 0.3);
+}
+
+/* Scrollbar — modern */
+.era-modern ::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.3);
+  border-radius: 9999px;
+}
+.era-modern ::-webkit-scrollbar-thumb:hover {
+  background: rgba(148, 163, 184, 0.5);
+}
